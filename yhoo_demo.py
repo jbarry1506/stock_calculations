@@ -62,18 +62,22 @@ principal = ['fxnax', 'jcbux', 'mphrx', 'pgblx', 'trrfx', 'trrax', 'trrbx',
 'vspmx', 'vsmsx', 'rerfx', 'odvyx', 'vtmgx'
 ]
 
-for ms in my_stocks:
+# TODO - MAKE THIS A FUNCTION
+for ms in principal:
     stock_info = None
     try:
         stock_info = get_stock_info(ms)
     except:
         print("That symbol is not available for analysis at this time.")
-
-    if None != stock_info:
-        name = stock_info['longName']
-        change_52 = stock_info['52WeekChange']
-        two_hundred_average = stock_info['twoHundredDayAverage']
-        fifty_average = stock_info['fiftyDayAverage']
+        break
+    
+    name = stock_info['longName']
+    investment_type = stock_info['quoteType']
+    high_52 = stock_info['fiftyTwoWeekHigh']
+    two_hundred_average = stock_info['twoHundredDayAverage']
+    fifty_average = stock_info['fiftyDayAverage']
+    
+    if stock_info['tradeable']:
         ask = stock_info['ask']
         buy = stock_info['bid']
         ba_spread = bid_ask_spread(get_stock_info(ms))
@@ -88,5 +92,8 @@ for ms in my_stocks:
         else:
             print("The fifty day average is {}".format(fifty_average))
             print("The two hundred day average is {}".format(two_hundred_average))
-
+    else:
+        print("{} is not tradable.".format(name))
+        print("The investment type is {}".format(investment_type))
+    
 print('got all the data')
