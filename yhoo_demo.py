@@ -17,8 +17,7 @@ import pprint
 # data_gild = gild.info
 # pprint.pprint(data_gild)
 
-## Data to find
-
+## Data
 # 52 week change
     # stock_info['52WeekChange']
 
@@ -31,7 +30,7 @@ import pprint
 
 # get all info for stock
 # TODO - CHANGE FUNCTION TO get_investment_info(symbol)
-def get_stock_info(stock):
+def get_investment_info(stock):
     stock_data = yf.Ticker(stock)
     stock_info = stock_data.info
     return stock_info
@@ -62,6 +61,7 @@ def fifty_above_twohun(twohun, fifty):
 # Share Turnover Ratio = trading volume / average shares
 
 my_stocks = ['msft', 'aapl', 'gild', 'sage', 'mdb', 'flr', 'ntnx']
+lauren = ['fscsx']
 principal = ['fxnax', 'jcbux', 'mphrx', 'pgblx', 'trrfx', 'trrax', 'trrbx', 
 'trrgx', 'trrhx', 'trrcx', 'trrjx', 'trrdx', 'trrkx', 'trrmx', 'trrnx', 'trrlx',
 'fxaix', 'fcgax', 'peiqx', 'vftnx', 'aredx', 'ggotx', 'jvtnx', 'flmvx', 'fsccx', 
@@ -71,10 +71,10 @@ principal = ['fxnax', 'jcbux', 'mphrx', 'pgblx', 'trrfx', 'trrax', 'trrbx',
 my_investments = [my_stocks, principal]
 
 # TODO - MAKE THIS A FUNCTION
-for ms in principal:
+for ms in my_stocks:
     stock_info = None
     try:
-        stock_info = get_stock_info(ms)
+        stock_info = get_investment_info(ms)
     except:
         print("That symbol is not available for analysis at this time.")
         break
