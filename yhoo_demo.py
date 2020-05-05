@@ -2,7 +2,7 @@ import yfinance as yf
 import pprint
 
 """ 
-EXAMPLE OF BASE DATA
+## EXAMPLE OF BASE DATA
 # apple = yf.Ticker('AAPL')
 # data_aapl = apple.info
 # pprint.pprint(data_appl)
