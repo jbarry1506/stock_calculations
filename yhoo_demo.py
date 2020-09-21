@@ -1,5 +1,6 @@
 import yfinance as yf
 import pprint
+import time
 
 """ 
 ## EXAMPLE OF BASE DATA
@@ -69,13 +70,31 @@ def investment_analysis(investments):
         two_hundred_average = investment_info['twoHundredDayAverage']
         fifty_average = investment_info['fiftyDayAverage']
         previous_close = investment_info['previousClose']
+        ytdreturn = investment_info['ytdReturn']
+        last_split_date = time.ctime(investment_info['lastSplitDate'])
+        last_split_factor = investment_info['lastSplitFactor']
+        dividend_rate = investment_info['dividendRate']
+        dividend_yield = investment_info['dividendYield']
 
-
-        print('\n', name)
+        print('\n', '{} \t {}'.format(name, ms))
         try:
             print('The previous close was {}'.format(previous_close))
         except:
             print("The previous close data is not available for {}".format(name))
+
+        try:
+            print("YTD return is {}".format(ytdreturn))
+            print(type(ytdreturn))
+            if ytdreturn > .05:
+                print("\t Look closer!")
+        except:
+            print("ytd return is not available for {}".format(name))
+
+        try:
+            print("The last split date was {} at a {} ratio.".format(last_split_date, last_split_factor))
+        except:
+            print("Unable to resolve a split date or factor.")
+
         # try to find the bid and ask values
         try:
             ask = investment_info['ask']
@@ -98,13 +117,18 @@ def investment_analysis(investments):
                 print("The two hundred day average is {}".format(two_hundred_average))            
 
         print("The investment type is {}".format(investment_type))
+        try:
+            print("\tDividend Rate:  {}".format(dividend_rate))
+            print("\tDividend Yield:  {}".format(dividend_yield))
+        except:
+            print("Dividend rate or yield not available.")
         
     print('got all the data')
 
 
 my_stocks = ['msft', 'aapl', 'sage', 'mdb', 'flr', 'ntnx']
-lauren = ['fscsx', 'aapl']
-jim = ['TRRDX', 'msft', 'mu', 'qrvo']
+lauren = ['fscsx', 'aapl', 'brk\\b']
+jim = ['ggotx', 'msft', 'mu', 'qrvo', 'jagtx']
 principal = ['fxnax', 'jcbux', 'mphrx', 'pgblx', 'trrfx', 'trrax', 'trrbx', 
 'trrgx', 'trrhx', 'trrcx', 'trrjx', 'trrdx', 'trrkx', 'trrmx', 'trrnx', 'trrlx',
 'fxaix', 'fcgax', 'peiqx', 'vftnx', 'aredx', 'ggotx', 'jvtnx', 'flmvx', 'fsccx', 
@@ -114,4 +138,4 @@ principal = ['fxnax', 'jcbux', 'mphrx', 'pgblx', 'trrfx', 'trrax', 'trrbx',
 my_investments = [principal]
 
 
-investment_analysis(principal)
+investment_analysis(jim)
