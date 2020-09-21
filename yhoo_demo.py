@@ -97,15 +97,16 @@ def investment_analysis(investments):
     print('got all the data')
 
 
-my_stocks = ['msft', 'aapl', 'gild', 'sage', 'mdb', 'flr', 'ntnx']
-lauren = ['fscsx']
+my_stocks = ['msft', 'aapl', 'sage', 'mdb', 'flr', 'ntnx']
+lauren = ['fscsx', 'aapl']
+jim = ['TRRDX', 'msft', 'mu', 'qrvo']
 principal = ['fxnax', 'jcbux', 'mphrx', 'pgblx', 'trrfx', 'trrax', 'trrbx', 
 'trrgx', 'trrhx', 'trrcx', 'trrjx', 'trrdx', 'trrkx', 'trrmx', 'trrnx', 'trrlx',
 'fxaix', 'fcgax', 'peiqx', 'vftnx', 'aredx', 'ggotx', 'jvtnx', 'flmvx', 'fsccx', 
 'vspmx', 'vsmsx', 'rerfx', 'odvyx', 'vtmgx'
 ]
 
-my_investments = [my_stocks, principal]
+my_investments = [principal]
 
 
-investment_analysis(my_stocks)
+investment_analysis(jim)
