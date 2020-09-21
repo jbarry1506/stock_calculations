@@ -70,7 +70,12 @@ def investment_analysis(investments):
         fifty_average = investment_info['fiftyDayAverage']
         previous_close = investment_info['previousClose']
 
+
         print('\n', name)
+        try:
+            print('The previous close was {}'.format(previous_close))
+        except:
+            print("The previous close data is not available for {}".format(name))
         # try to find the bid and ask values
         try:
             ask = investment_info['ask']
@@ -109,4 +114,4 @@ principal = ['fxnax', 'jcbux', 'mphrx', 'pgblx', 'trrfx', 'trrax', 'trrbx',
 my_investments = [principal]
 
 
-investment_analysis(jim)
+investment_analysis(principal)
