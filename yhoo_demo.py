@@ -1,6 +1,7 @@
 import yfinance as yf
 import pprint
 import time
+from termcolor import colored
 
 """ 
 ## EXAMPLE OF BASE DATA
@@ -62,7 +63,7 @@ def investment_analysis(investments):
             investment_info = get_investment_info(ms)
         except:
             print("That symbol is not available for analysis at this time.")
-            break
+            continue
         
         name = investment_info['longName']
         investment_type = investment_info['quoteType']
@@ -70,6 +71,8 @@ def investment_analysis(investments):
         two_hundred_average = investment_info['twoHundredDayAverage']
         fifty_average = investment_info['fiftyDayAverage']
         previous_close = investment_info['previousClose']
+        regular_market_previous_close = investment_info['regularMarketPreviousClose']
+        regular_market_price = investment_info['regularMarketPrice']
         ytdreturn = investment_info['ytdReturn']
         last_split_date = time.ctime(investment_info['lastSplitDate'])
         last_split_factor = investment_info['lastSplitFactor']
@@ -83,9 +86,22 @@ def investment_analysis(investments):
             print("The previous close data is not available for {}".format(name))
 
         try:
+            print('The reg market previous close was {}'.format(regular_market_previous_close))
+        except:
+            print("The reg market previous close data is not available for {}".format(name))
+
+        try:
+            if regular_market_previous_close > regular_market_price:
+                print(colored('The reg market price was {}'.format(regular_market_price), 'red'))
+            else:
+                print(colored('The reg market price was {}'.format(regular_market_price), 'green'))
+        except:
+            print("The reg market price data is not available for {}".format(name))
+
+        try:
             print("YTD return is {}".format(ytdreturn))
             print(type(ytdreturn))
-            if ytdreturn > .05:
+            if ytdreturn > .3:
                 print("\t Look closer!")
         except:
             print("ytd return is not available for {}".format(name))
@@ -128,14 +144,18 @@ def investment_analysis(investments):
 
 my_stocks = ['msft', 'aapl', 'sage', 'mdb', 'flr', 'ntnx']
 lauren = ['fscsx', 'aapl', 'brk\\b']
-jim = ['ggotx', 'msft', 'mu', 'qrvo', 'jagtx']
+jim = ['ggotx', 'msft', 'mu', 'qrvo', 'jagtx', 'trrdx', 'fscsx', 'aapl', 'ddog']
 principal = ['fxnax', 'jcbux', 'mphrx', 'pgblx', 'trrfx', 'trrax', 'trrbx', 
 'trrgx', 'trrhx', 'trrcx', 'trrjx', 'trrdx', 'trrkx', 'trrmx', 'trrnx', 'trrlx',
 'fxaix', 'fcgax', 'peiqx', 'vftnx', 'aredx', 'ggotx', 'jvtnx', 'flmvx', 'fsccx', 
 'vspmx', 'vsmsx', 'rerfx', 'odvyx', 'vtmgx'
 ]
+janus = ['JABLX', 'JGLTX', 'JATAX', 'JDBAX', 'JACAX', 'JDCAX', 'JAGRX', 'JAFLX', 'JRAAX', 'JAWGX', 'JAGTX']
+jagtx_top = ['MSFT', 'AAPL', 'AMZN', 'ADBE', 'MA', 'TXN', 'BABA', 'FB', 'ASML', 'CRM']
+ggotx_top = ['LULU', 'VRSK', 'ORLY', 'DOCU', 'SPLK', 'VEEV', 'CDNS', 'ROK', 'BLL', 'PANW']
+fscsx_top = ['MSFT', 'V', 'ADBE', 'CRM', 'MA', 'PYPL', 'GOOGL', 'CTSH', 'ORCL']
 
-my_investments = [principal]
+my_investments = [janus]
 
 
-investment_analysis(jim)
+investment_analysis(ggotx_top)
