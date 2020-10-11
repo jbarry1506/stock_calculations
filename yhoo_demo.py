@@ -62,7 +62,7 @@ def investment_analysis(investments):
         try:
             investment_info = get_investment_info(ms)
         except:
-            print("That symbol is not available for analysis at this time.")
+            print(colored("That symbol is not available for analysis at this time.", 'red'))
             continue
         
         name = investment_info['longName']
@@ -76,10 +76,12 @@ def investment_analysis(investments):
         ytdreturn = investment_info['ytdReturn']
         last_split_date = time.ctime(investment_info['lastSplitDate'])
         last_split_factor = investment_info['lastSplitFactor']
+        last_dividend_value = investment_info['lastDividendValue']
         dividend_rate = investment_info['dividendRate']
         dividend_yield = investment_info['dividendYield']
 
-        print('\n', '{} \t {}'.format(name, ms))
+        print('\n')
+        print(colored('{} \t {}'.format(name, ms), 'yellow'))
         try:
             print('The previous close was {}'.format(previous_close))
         except:
@@ -134,12 +136,13 @@ def investment_analysis(investments):
 
         print("The investment type is {}".format(investment_type))
         try:
+            print("\tLast Dividend Value:  {}".format(last_dividend_value))
             print("\tDividend Rate:  {}".format(dividend_rate))
             print("\tDividend Yield:  {}".format(dividend_yield))
         except:
             print("Dividend rate or yield not available.")
         
-    print('got all the data')
+    print(colored('got all the data', 'cyan'))
 
 
 my_stocks = ['msft', 'aapl', 'sage', 'mdb', 'flr', 'ntnx']
@@ -151,11 +154,13 @@ principal = ['fxnax', 'jcbux', 'mphrx', 'pgblx', 'trrfx', 'trrax', 'trrbx',
 'vspmx', 'vsmsx', 'rerfx', 'odvyx', 'vtmgx'
 ]
 janus = ['JABLX', 'JGLTX', 'JATAX', 'JDBAX', 'JACAX', 'JDCAX', 'JAGRX', 'JAFLX', 'JRAAX', 'JAWGX', 'JAGTX']
+
 jagtx_top = ['MSFT', 'AAPL', 'AMZN', 'ADBE', 'MA', 'TXN', 'BABA', 'FB', 'ASML', 'CRM']
 ggotx_top = ['LULU', 'VRSK', 'ORLY', 'DOCU', 'SPLK', 'VEEV', 'CDNS', 'ROK', 'BLL', 'PANW']
 fscsx_top = ['MSFT', 'V', 'ADBE', 'CRM', 'MA', 'PYPL', 'GOOGL', 'CTSH', 'ORCL']
 
-my_investments = [janus]
+my_investments = [jim]
 
-
-investment_analysis(ggotx_top)
+for i in my_investments:
+    print('\n', i)
+    investment_analysis(i)
